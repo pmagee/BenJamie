@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if category %}
+        {{ category.name }} - Products
+    {% else %}
+        All Products
+    {% endif %}
+{% endblock %}
+
+{% block metadescription %}
+    
+{% endblock %}
+
+{% block content %}
+        <div class="toggle-buttons">
+            <button id="listViewBtn" class="btn active">List View</button>
+            <button id="gridViewBtn" class="btn">Grid View</button>
+        </div>
+
+        <div class="row">  
+            <div class="col-3 border">
+                <form method="GET" action="{% url 'products:filter_view' %}">
+                <div class="form-row row">
+                    <div class="form-group form-group col-md-6">
+                      <label for="priceMin">Minimum Price</label>
+                      <input type="number" min=0 class="form-control" id="priceMin" placeholder="0" name="price_min">
+                    </div>
+                    <br>
+                    <div class="form-group form-group col-md-6">
+                      <label for="priceMax">Maximum Price</label>
+                      <input type="number" min=0 class="form-control" id="priceMax" placeholder="10,000" name="price_max">
+                    </div>
+                    <br>
+                    <div class="form-group form-group col-md-6">
+                      <label for="category">Category</label>
+                      <select id="category" class="form-control" name="category">
+                        <option selected>Choose...</option>
+                        {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <br>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+            <div class="col-9">
+                <div id="product_display_div" class="row list-view">
+                    {% if qs %}
+                        {% for product in qs %}
+                            {% include 'shop/product_display_grid.html' %}
+                        {% endfor %}
+                    {% elif prods %}
+                        {% for product in prods %}
+                            {% include 'shop/product_display_grid.html' %}
+                        {% endfor %}
+                    {% else %}
+                        <p>No products found.</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+
+        <div class="mx-auto">
+            {% if prods.paginator.num_pages > 0 %}
+                <div class="text-center">
+                    {% for pg in prods.paginator.page_range %}
+                        <a href="?page={{pg}}" class="btn btn-light rounded-pill btn-sm {% if products.number == pg %}active{% endif %} {% if pg == prods.number %}btn-dark{% endif %}">{{pg}}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <script src="{% static 'js/test.js' %}"></script>
+    </div>
+{% endblock %}

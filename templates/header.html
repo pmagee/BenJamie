@@ -1,0 +1,19 @@
+{% load static %}
+<header class="text-center px-4">
+    <div class="container border rounded bg-secondary text-white mt-3">
+        <div class="row">
+            <div class="col align-items-center">
+                <p class="h2 text-center mt-4">
+                    Welcome, 
+                    {% if user.is_authenticated %}
+                        - {{ user.username }}
+                    {% endif %}
+                </p>
+                <p class="text-center my-2">To Computer Center, Your number one site for new computers.<br> We’ve got different types of computers to choose from.</p>
+            </div>
+            <!-- <div class="col">
+                <img style="width: 30rem;" src="{% static 'images/computing-header.png' %}" alt="Desktops">
+            </div> -->
+        </div>
+    </div>
+</header>

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Computer Center - Home Page
+{% endblock title %}
+
+{% block content %}
+    {% include 'header.html' %}
+
+    <div class="border rounded m-5">
+        <p class="text-center h3">Catagories</p>
+        <div class="row">
+            <a class="col text-dark text-center text-decoration-none" href="{% url 'products:all_products' %}">
+                <img style="width: 10rem;" src="{% static 'images/laptops.png' %}" alt="Laptops">
+                <p>Laptops</p>
+            </a>
+            <a class="col text-dark text-center text-decoration-none" href="{% url 'products:all_products' %}">
+                <img style="width: 10rem;" src="{% static 'images/desktop-pcs.png' %}" alt="Desktops">
+                <p>Desktop PCs</p>
+            </a>
+        </div>
+    </div>
+    
+    <div class="container d-flex justify-content-center">
+        <div class="border rounded w-50 bg-secondary p-1">
+            <a class="text-center text-white text-decoration-none" href="{% url 'products:all_products' %}">
+                <img style="width: 10rem;" src="{% static 'images/desktop-pcs.png' %}" alt="Desktops">
+                <p>Go to all Products</p>
+            </a>
+        </div>
+    </div>
+
+{% endblock content %}

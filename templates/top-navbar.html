@@ -1,0 +1,46 @@
+<div class="container row">
+    <div class="col-5 my-auto text-white">
+        <a class="text-decoration-none text-white h3" href="{% url 'home' %}">
+            Computer Center
+        </a>
+    </div>
+
+    <div class="col-4 mt-2">
+        <form class="row" action="{% url 'search_app:searchResult' %}" method="get">
+            <input class="col me-1 form-control" type="search" placeholder="Search" aria-label="Search" name="q">
+            <button class="col btn rounded-circle btn-light" style="max-width: 2.5rem;" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+    <div class="col my-auto my_custom_menu">
+        <ul>
+            {% if user.is_authenticated %}
+            <li>
+                <a href="#" class="dropdown-toggle text-white" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ user.username }} <i class="fas fa-user-circle"></i>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right">
+                    <!-- Sign out form with proper styling -->
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="dropdown-item" style="border: none; background: none;">
+                            Sign Out <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
+                    <a href="{% url 'password_change' %}" class="dropdown-item">Change Password</a>
+                    <a href="" class="dropdown-item">Order History</a>
+                </div>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'signup' %}">Sign Up <i class="fas fa-user-plus text-light"></i></a>
+            </li>
+            <li>
+                <a href="{% url 'login' %}">Login In <i class="fas fa-sign-in text-light"></i></a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="product-item">
+    <div class="card ms-3 mb-4 shadow">
+        <div class="row">
+            <div class="col-3">
+                <a class="img" href="{{ product.get_absolute_url }}">
+                    <img class="card-img-top" style="width: 10rem;" src="{{ product.image.url }}" alt="{{ product.name }}">
+                </a>
+            </div>
+
+            <div class="col-7">
+                <a class="nav-link" href="{{ product.get_absolute_url }}">
+                    <p class="h4 text-start">{{ product.name }}</p>
+                </a>
+
+                <div>
+                    <p class="text-start text-reset">
+                        {{ product.description }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <p class="text-start"> €{{ product.price }}</p>
+
+                <div class="d-flex align-items-end pb-3">
+                    {% if product.stock == 0 %}
+                        <p class="text-justify my_prod_text"><b>Out of Stock</b></p>
+                    {% else %}
+                        <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
